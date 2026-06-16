@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ways of Knowing and Doing in Digital Rhetoric: Pedagogy</title>
+
+  <style>
+    /* ---------- Base styles ---------- */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #222;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    /* ---------- Header and navigation ---------- */
+
+    .site-header {
+      background: #6f8197;
+      color: #ffffff;
+      border-bottom: 4px solid #f58220;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 26px;
+      gap: 24px;
+    }
+
+    .site-title {
+      font-size: 1.55rem;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      white-space: nowrap;
+    }
+
+    .main-nav a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: #ffd15c;
+    }
+
+    /* ---------- Main layout ---------- */
+
+    .page {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 16px 8px 8px;
+      height: calc(100vh - 78px);
+    }
+
+    .left-column,
+    .right-column {
+      min-width: 0;
+    }
+
+    .panel {
+      border: 4px solid #6f8197;
+      border-radius: 4px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    /* ---------- Left video panel ---------- */
+
+    .video-panel {
+      padding: 10px;
+      margin-bottom: 18px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* ---------- Transcript panel ---------- */
+
+    .transcript-panel {
+      background: #6f8197;
+      color: #ffffff;
+      height: calc(100vh - 520px);
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .autoscroll-bar {
+      background: #b9d8f0;
+      color: #ffffff;
+      text-align: center;
+      padding: 4px;
+      font-size: 0.95rem;
+    }
+
+    .transcript-title {
+      text-align: center;
+      font-size: 1.45rem;
+      color: #ffffff;
+      margin-top: -4px;
+      margin-bottom: 8px;
+    }
+
+    .transcript-content {
+      overflow-y: auto;
+      padding: 16px 28px;
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .transcript-content p {
+      margin: 0 0 14px;
+      color: #ffffff;
+    }
+
+    .speaker {
+      font-weight: bold;
+    }
+
+    /* ---------- Right reading panel ---------- */
+
+    .article-panel {
+      height: 100%;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    .article-scroll {
+      height: 100%;
+      overflow-y: auto;
+      padding: 24px 34px 34px;
+      border: 10px solid #f8f8f8;
+    }
+
+    .article-scroll h2 {
+      text-align: center;
+      font-size: 1.65rem;
+      margin-bottom: 22px;
+    }
+
+    .article-scroll p {
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-scroll ul {
+      max-width: 760px;
+      margin: 14px auto 24px;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .diagram-placeholder {
+      width: 70%;
+      max-width: 540px;
+      min-height: 260px;
+      margin: 24px auto;
+      border: 1px solid #ddd;
+      display: grid;
+      place-items: center;
+      color: #666;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+      background:
+        linear-gradient(135deg, rgba(255, 180, 180, 0.45), transparent 45%),
+        linear-gradient(225deg, rgba(180, 220, 255, 0.45), transparent 45%),
+        linear-gradient(315deg, rgba(255, 240, 150, 0.45), transparent 45%);
+    }
+
+    /* ---------- Responsive behavior ---------- */
+
+    @media (max-width: 1000px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .site-title {
+        white-space: normal;
+      }
+
+      .main-nav {
+        flex-wrap: wrap;
+        gap: 14px 22px;
+      }
+
+      .page {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .transcript-panel,
+      .article-panel {
+        height: 500px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        padding: 12px 16px;
+      }
+
+      .site-title {
+        font-size: 1.25rem;
+      }
+
+      .main-nav {
+        font-size: 0.95rem;
+      }
+
+      .page {
+        padding: 10px;
+      }
+
+      .article-scroll {
+        padding: 22px 18px;
+      }
+
+      .diagram-placeholder {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="top-bar">
+      <h1 class="site-title">
+        Ways of Knowing and Doing in Digital Rhetoric: Pedagogy
+      </h1>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#" class="active">Introduction</a>
+        <a href="#">Methods</a>
+        <a href="#">Outcomes</a>
+        <a href="#">Scholars/Readings</a>
+        <a href="#">Assignments</a>
+        <a href="#">Assessment</a>
+        <a href="#">Conclusion</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- Left column -->
+    <section class="left-column">
+
+      <div class="panel video-panel">
+        <div class="video-wrapper">
+          <!-- Replace the src below with your own YouTube embed URL -->
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Intro Video"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="panel transcript-panel">
+        <div class="autoscroll-bar">Click here to resume autoscroll</div>
+
+        <h2 class="transcript-title">Transcript</h2>
+
+        <div class="transcript-content">
+          <p>
+            <span class="speaker">Hart-Davidson:</span>
+            Yeah, how I define digital rhetoric probably has changed this weekend.
+            It's a moving target.
+          </p>
+
+          <p>
+            <span class="speaker">Yancey:</span>
+            The question of the hour is whether it's simply another episode in a
+            continuous history of rhetoric or whether it marks some kind of rupture.
+          </p>
+
+          <p>
+            <span class="speaker">Beck:</span>
+            I tend to say that it's studying discourse in digital spaces.
+          </p>
+
+          <p>
+            <span class="speaker">Hodgson:</span>
+            What I typically do when I talk to students about this is I say rhetoric
+            itself is concerned with discourse—however you want to look at it.
+          </p>
+
+          <p>
+            <span class="speaker">Arola:</span>
+            I’m just gonna go Aristotle on this one. It’s discovering the available
+            means of persuasion in, around, through digital spaces.
+          </p>
+
+          <p>
+            <span class="speaker">Your Speaker:</span>
+            Replace this transcript text with your own interview, narration, or
+            multimodal commentary.
+          </p>
+        </div>
+
+        <div class="autoscroll-bar">Click here to resume autoscroll</div>
+      </div>
+
+    </section>
+
+    <!-- Right column -->
+    <section class="right-column">
+      <article class="panel article-panel">
+        <div class="article-scroll">
+
+          <h2>Introduction</h2>
+
+          <p>
+            <em>What is digital rhetoric, and what does it mean to teach digital rhetoric?</em>
+            In this webtext, we synthesize and share converging and contrasting
+            perspectives on ways of knowing and doing in digital rhetoric pedagogy.
+          </p>
+
+          <p>
+            Through this synthesis, we have two related purposes. First, we provide
+            a rough sketch of the state of digital rhetoric pedagogy as it is
+            understood and practiced in contemporary writing studies. Second, we
+            identify and highlight areas of productive tension among these responses.
+          </p>
+
+          <p>
+            Toward that end, we propose a three-axis framework for understanding
+            the tensions within digital rhetoric pedagogy, with each axis providing
+            a continuum that represents an area of productive difference:
+          </p>
+
+          <ul>
+            <li><strong>Continuation</strong> ⟷ <strong>Rupture</strong></li>
+            <li><strong>Theory</strong> ⟷ <strong>Practice</strong></li>
+            <li><strong>Text</strong> ⟷ <strong>Network</strong></li>
+          </ul>
+
+          <div class="diagram-placeholder">
+            Diagram / Figure Placeholder
+          </div>
+
+          <p>
+            This section can hold your primary article prose, diagrams, embedded
+            media, pull quotes, figures, or links to other sections of the webtext.
+            The panel scrolls independently so the reader can view the video,
+            transcript, and written argument side by side.
+          </p>
+
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+</body>
+</html>
